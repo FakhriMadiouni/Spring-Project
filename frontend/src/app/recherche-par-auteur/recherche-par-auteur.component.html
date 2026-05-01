@@ -1,0 +1,80 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-info text-white">
+      <h4 class="mb-0">🔍 Recherche de Livres</h4>
+    </div>
+    <div class="card-body">
+
+      <!-- Recherche par auteur -->
+      <div class="row mb-3">
+        <div class="col-md-8">
+          <label class="form-label fw-bold">Rechercher par Auteur :</label>
+          <select class="form-select" [(ngModel)]="selectedAuteurId">
+            <option value="" disabled selected>-- Choisir un auteur --</option>
+            @for (auteur of auteurs; track auteur.idAuteur) {
+              <option [value]="auteur.idAuteur">
+                {{ auteur.nomAuteur }} ({{ auteur.nationalite }})
+              </option>
+            }
+          </select>
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+          <button class="btn btn-info text-white w-100" (click)="rechercherParAuteur()">
+            🔍 Chercher par Auteur
+          </button>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- Recherche par titre -->
+      <div class="row mb-3">
+        <div class="col-md-8">
+          <label class="form-label fw-bold">Rechercher par Titre :</label>
+          <input type="text" class="form-control" [(ngModel)]="searchNom"
+                 placeholder="Entrer un mot du titre..."
+                 (keyup.enter)="rechercherParNom()">
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+          <button class="btn btn-secondary w-100" (click)="rechercherParNom()">
+            🔍 Chercher par Titre
+          </button>
+        </div>
+      </div>
+
+      <!-- Résultats -->
+      @if(hasSearched) {
+        <div class="mt-3">
+          <h6>Résultats : {{ livres.length }} livre(s) trouvé(s)</h6>
+          <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+              <tr>
+                <th>ID</th>
+                <th>Titre</th>
+                <th>Prix</th>
+                <th>Date Publication</th>
+                <th>Auteur</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (livre of livres; track livre.idLivre) {
+                <tr>
+                  <td>{{ livre.idLivre }}</td>
+                  <td>{{ livre.titreLivre }}</td>
+                  <td>{{ livre.prixLivre | number:'1.2-2' }} DT</td>
+                  <td>{{ livre.datePublication | date:'dd/MM/yyyy' }}</td>
+                  <td>{{ livre.auteur?.nomAuteur }}</td>
+                </tr>
+              }
+              @empty {
+                <tr>
+                  <td colspan="5" class="text-center text-muted">Aucun résultat.</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      }
+    </div>
+  </div>
+</div>

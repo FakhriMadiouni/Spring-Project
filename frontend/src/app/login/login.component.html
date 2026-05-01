@@ -1,0 +1,40 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card shadow">
+        <div class="card-header bg-dark text-white text-center">
+          <h4>📚 Connexion Bibliothèque</h4>
+        </div>
+        <div class="card-body">
+
+          @if(err === 1) {
+            <div class="alert alert-danger">
+              <strong>Login ou mot de passe incorrect.</strong>
+            </div>
+          }
+
+          <form>
+            <div class="mb-3">
+              <label class="form-label">Nom d'utilisateur</label>
+              <input type="text" name="username" class="form-control"
+                     [(ngModel)]="user.username" placeholder="admin ou user1">
+            </div>
+            <div class="mb-3">
+              <label class="form-label">Mot de passe</label>
+              <input type="password" name="password" class="form-control"
+                     [(ngModel)]="user.password" placeholder="••••••••">
+            </div>
+            <div class="d-grid">
+              <button type="button" class="btn btn-dark btn-lg"
+                      (click)="onLoggedin()">Connexion</button>
+            </div>
+          </form>
+
+          <div class="mt-3 text-muted small">
+            <strong>Comptes :</strong> admin/admin123 (ADMIN) · user1/user123 (USER)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

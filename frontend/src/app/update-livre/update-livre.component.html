@@ -1,0 +1,53 @@
+<div class="container mt-4">
+  <div class="card shadow">
+    <div class="card-header bg-warning">
+      <h4 class="mb-0">✏️ Modifier le Livre</h4>
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="row mb-3">
+          <div class="col-md-2">
+            <label class="form-label">ID</label>
+            <input type="text" class="form-control" readonly
+                   [(ngModel)]="currentLivre.idLivre" name="idLivre">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Titre du Livre *</label>
+            <input type="text" class="form-control"
+                   [(ngModel)]="currentLivre.titreLivre" name="titreLivre">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Prix (DT) *</label>
+            <input type="number" class="form-control"
+                   [(ngModel)]="currentLivre.prixLivre" name="prixLivre">
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <div class="col-md-6">
+            <label class="form-label">Date de Publication</label>
+            <input type="date" class="form-control"
+                   [ngModel]="currentLivre.datePublication | date:'yyyy-MM-dd'"
+                   (ngModelChange)="currentLivre.datePublication = $event"
+                   name="datePublication">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Auteur</label>
+            <select class="form-select" [(ngModel)]="updatedAuteurId" name="auteurId">
+              @for (auteur of auteurs; track auteur.idAuteur) {
+                <option [value]="auteur.idAuteur">{{ auteur.nomAuteur }}</option>
+              }
+            </select>
+          </div>
+        </div>
+
+        <div class="d-flex gap-2">
+          <button type="button" class="btn btn-warning" (click)="updateLivre()">
+            💾 Modifier
+          </button>
+          <a class="btn btn-secondary" routerLink="/livres">Annuler</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
